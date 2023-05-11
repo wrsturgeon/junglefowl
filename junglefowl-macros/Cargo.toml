@@ -1,0 +1,13 @@
+[package]
+name = "junglefowl-macros"
+version = "0.1.0"
+edition = "2021"
+description = "Macros for type-level mathematical computation."
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "*"
+quote = "*"
+syn = { version = "*", features = ["full"] }

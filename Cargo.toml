@@ -1,0 +1,14 @@
+[package]
+name = "junglefowl"
+version = "0.1.0"
+authors = ["Will Sturgeon <willstrgn@gmail.com>"]
+edition = "2021"
+description = "Brutally murdering Rust's type system one proof at a time."
+license = "LGPL-3.0-or-later"
+repository = "https://github.com/wrsturgeon/junglefowl"
+readme = "README.md"
+keywords = ["types", "proofs", "math", "logic", "metaprogramming"]
+categories = ["mathematics", "encoding", "algorithms", "compilers", "data-structures"]
+
+[dependencies]
+junglefowl-macros = { path = "junglefowl-macros", version = ">0.0" }
