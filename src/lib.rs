@@ -14,6 +14,8 @@
 #![allow(
     clippy::blanket_clippy_restriction_lints,
     clippy::pub_use,
+    clippy::question_mark_used,
+    clippy::implicit_return,
     clippy::mod_module_files
 )]
 

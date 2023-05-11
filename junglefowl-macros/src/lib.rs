@@ -1,16 +1,39 @@
+//! Macros to make interesting types to reason with.
+
+#![deny(warnings)]
+#![warn(
+    missing_docs,
+    rustdoc::all,
+    clippy::missing_docs_in_private_items,
+    clippy::all,
+    clippy::restriction,
+    clippy::pedantic,
+    clippy::nursery,
+    clippy::cargo
+)]
+#![allow(
+    clippy::blanket_clippy_restriction_lints,
+    clippy::pub_use,
+    clippy::question_mark_used,
+    clippy::implicit_return,
+    clippy::mod_module_files
+)]
+
 extern crate proc_macro;
 
 use quote::ToTokens;
 
+/// Create a unique type representing the given number.
 #[proc_macro]
 pub fn peano(ts: proc_macro::TokenStream) -> proc_macro::TokenStream {
     match perform(ts.into()) {
-        Ok(ts) => ts,
+        Ok(done) => done,
         Err(e) => e.into_compile_error(),
     }
     .into()
 }
 
+/// Create a `syn`-compatible parentheses token.
 macro_rules! paren {
     () => {
         syn::token::Paren {
@@ -23,6 +46,7 @@ macro_rules! paren {
     };
 }
 
+/// Create a `syn`-compatible `()` token.
 macro_rules! unit {
     () => {
         syn::Expr::Tuple(syn::ExprTuple {
@@ -31,8 +55,9 @@ macro_rules! unit {
             elems: syn::punctuated::Punctuated::new(),
         })
     };
-} // ==> `()`
+}
 
+/// Actually run the proc-macro
 fn perform(ts: proc_macro2::TokenStream) -> Result<proc_macro2::TokenStream, syn::Error> {
     let arity_lit: syn::LitInt = syn::parse2(ts)?;
     let arity: isize = arity_lit.base10_parse()?;
@@ -43,6 +68,7 @@ fn perform(ts: proc_macro2::TokenStream) -> Result<proc_macro2::TokenStream, syn
         ))
     } else {
         let mut ast = unit!();
+        #[allow(clippy::as_conversions, clippy::cast_sign_loss)]
         for _ in 0..(arity as usize) {
             ast = syn::Expr::Tuple(syn::ExprTuple {
                 attrs: vec![],
