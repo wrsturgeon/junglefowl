@@ -1,6 +1,6 @@
 //! Peano arithmetic: essentially unary encoding in types rather than values.
 
-mod ops;
+pub mod ops;
 mod traits;
 
 pub use traits::*;

@@ -17,7 +17,7 @@ mod whitelist {
 }
 
 /// Inductive "type" (trait) representing a natural number in Peano arithmetic.
-pub trait N: whitelist::N {
+pub trait N: whitelist::N + Sized {
     /// The value this unique type represents, as a Rust `usize`. Technically breaks at 2^64 on a 64b machine, but reaching the limit would be ridiculously impractical.
     const USIZE: usize;
 }
