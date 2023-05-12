@@ -1,6 +1,6 @@
 [package]
 name = "junglefowl"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Will Sturgeon <willstrgn@gmail.com>"]
 edition = "2021"
 description = "Brutally murdering Rust's type system one proof at a time."
